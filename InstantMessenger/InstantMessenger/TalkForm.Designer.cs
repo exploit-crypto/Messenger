@@ -40,7 +40,6 @@
             this.sendText = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,12 +104,12 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.BackColor = System.Drawing.Color.Gray;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(12, 34);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(73, 18);
+            this.materialLabel1.Size = new System.Drawing.Size(74, 19);
             this.materialLabel1.TabIndex = 4;
             this.materialLabel1.Text = "Messege:";
             // 
@@ -147,29 +146,18 @@
             this.sendText.Multiline = true;
             this.sendText.Name = "sendText";
             this.sendText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.sendText.Size = new System.Drawing.Size(418, 67);
+            this.sendText.Size = new System.Drawing.Size(418, 91);
             this.sendText.TabIndex = 6;
             // 
             // sendButton
             // 
             this.sendButton.Location = new System.Drawing.Point(616, 383);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(115, 67);
+            this.sendButton.Size = new System.Drawing.Size(115, 91);
             this.sendButton.TabIndex = 7;
             this.sendButton.Text = "button2";
             this.sendButton.UseVisualStyleBackColor = true;
             this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.menuStrip1.AutoSize = false;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Location = new System.Drawing.Point(192, 448);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(608, 29);
-            this.menuStrip1.TabIndex = 8;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // TalkForm
             // 
@@ -184,8 +172,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "TalkForm";
             this.Load += new System.EventHandler(this.TalkForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -208,7 +194,6 @@
         private System.Windows.Forms.TextBox sendText;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 
