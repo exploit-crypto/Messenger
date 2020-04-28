@@ -46,7 +46,6 @@ namespace InstantMessenger
                 status.Text = "Login...";
             }
         }
-
         void im_LoginOK(object sender, EventArgs e)
         {
             this.BeginInvoke(new MethodInvoker(delegate

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,8 +34,9 @@ namespace InstantMessenger
             skinManager.AddFormToManage(this);
             ///////////////////////////////////////////////////////////////////////////////////////
 
-            //End Fome Creator
-            talkText.Enabled = false;
+            //End Form Creator
+            talkText.Enabled = true;
+            talkText.ReadOnly = true;
             this.im = im;
             this.sendTo = user;
 
@@ -96,6 +99,7 @@ namespace InstantMessenger
             im.SendMessage(sendTo, sendText.Text);
             talkText.Text += String.Format("[{0}] {1}\r\n", im.UserName, sendText.Text);
             sendText.Text = "";
+            status.Text = "Sended";
         }
 
         bool lastAvail = false;
@@ -133,6 +137,24 @@ namespace InstantMessenger
             im.IsAvailable(sendTo);
         }
 
-        
+        private void AddFile_Click(object sender, EventArgs e)
+        {
+
+            byte[] tmp;
+            OpenFileDialog op;
+            TcpClient client = new TcpClient(im.Server, im.Port); ;
+            op = new OpenFileDialog();
+            if (op.ShowDialog() == DialogResult.OK)
+                Clipboard.SetText(op.FileName);
+            status.Text = "Uploading...";
+
+            //Stream s = client.GetStream();
+            tmp = File.ReadAllBytes(op.FileName);
+            //s.Write(tmp, 0, tmp.Length);
+            im.SendFile(sendTo,tmp);
+            //client.Close();
+        }
+
+
     }
 }

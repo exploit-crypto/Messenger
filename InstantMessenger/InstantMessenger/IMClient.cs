@@ -73,6 +73,16 @@ namespace InstantMessenger
                 bw.Flush();
             }
         }
+        public void SendFile(string to, byte[] tmp)
+        {
+            if (_conn)
+            {
+                bw.Write(IM_SendFile);
+                bw.Write(to);
+                bw.Write(tmp);
+                bw.Flush();
+            }
+        }
 
 
         public event EventHandler LoginOK;
@@ -82,6 +92,7 @@ namespace InstantMessenger
         public event EventHandler Disconnected;
         public event IMAvailEventHandler UserAvailable;
         public event IMReceivedEventHandler MessageReceived;
+        public event IMReceivedEventHandler FileReceived;
 
         virtual protected void OnLoginOK()
         {
@@ -118,7 +129,13 @@ namespace InstantMessenger
             if (MessageReceived != null)
                 MessageReceived(this, e);
         }
-
+        virtual protected void OnFileReceived(IMReceivedEventArgs e)
+        {
+            if (FileReceived != null)
+            {
+                FileReceived(this, e);
+            }
+        }
 
         TcpClient client;
         NetworkStream netStream;
@@ -201,6 +218,12 @@ namespace InstantMessenger
                         string msg = br.ReadString();
                         OnMessageReceived(new IMReceivedEventArgs(from, msg));
                     }
+                    else if (type == IM_SendFile)
+                    {
+                        string from = br.ReadString();
+                        string msg = br.ReadString();
+                        OnFileReceived(new IMReceivedEventArgs(from, msg));
+                    }
                 }
             }
             catch (IOException) { }
@@ -221,6 +244,7 @@ namespace InstantMessenger
         public const byte IM_IsAvailable = 8;  // Is user available?
         public const byte IM_Send = 9;         // Send message
         public const byte IM_Received = 10;    // Message received
+        public const byte IM_SendFile = 11;     // Send file
 
         public static bool ValidateCert(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
