@@ -1,0 +1,8 @@
+C:\Users\admin\Desktop\InstantMessengerServer\bin\Debug\server.pfx
+C:\Users\admin\Desktop\InstantMessengerServer\bin\Debug\tools\generate_cert.bat
+C:\Users\admin\Desktop\InstantMessengerServer\bin\Debug\InstantMessengerServer.exe
+C:\Users\admin\Desktop\InstantMessengerServer\bin\Debug\InstantMessengerServer.pdb
+C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.exe
+C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.pdb
