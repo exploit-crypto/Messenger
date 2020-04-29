@@ -21,14 +21,14 @@ namespace InstantMessengerServer
 
         Program prog;
         public TcpClient client;
-        public NetworkStream netStream;  
-        public SslStream ssl;            
+        public NetworkStream netStream;
+        public SslStream ssl;
         public BinaryReader br;
         public BinaryWriter bw;
 
-        UserInfo userInfo;  
-        
-        void SetupConn()  
+        UserInfo userInfo;
+
+        void SetupConn()
         {
             try
             {
@@ -37,54 +37,54 @@ namespace InstantMessengerServer
                 ssl = new SslStream(netStream, false);
                 ssl.AuthenticateAsServer(prog.cert, false, SslProtocols.Tls, true);
                 Console.WriteLine("[{0}] Connection authenticated!", DateTime.Now);
-                
+
 
                 br = new BinaryReader(ssl, Encoding.UTF8);
                 bw = new BinaryWriter(ssl, Encoding.UTF8);
 
-                
+
                 bw.Write(IM_Hello);
                 bw.Flush();
                 int hello = br.ReadInt32();
                 if (hello == IM_Hello)
                 {
-                    
+
                     byte logMode = br.ReadByte();
                     string userName = br.ReadString();
                     string password = br.ReadString();
-                    if (userName.Length < 10) 
+                    if (userName.Length < 10)
                     {
-                        if (password.Length < 20) 
+                        if (password.Length < 20)
                         {
-                            if (logMode == IM_Register)  
+                            if (logMode == IM_Register)
                             {
-                                if (!prog.users.ContainsKey(userName))  
+                                if (!prog.users.ContainsKey(userName))
                                 {
                                     userInfo = new UserInfo(userName, password, this);
-                                    prog.users.Add(userName, userInfo);  
+                                    prog.users.Add(userName, userInfo);
                                     bw.Write(IM_OK);
                                     bw.Flush();
                                     Console.WriteLine("[{0}] ({1}) Registered new user", DateTime.Now, userName);
                                     prog.SaveUsers();
-                                    Receiver();  
+                                    Receiver();
                                 }
                                 else
                                     bw.Write(IM_Exists);
                             }
-                            else if (logMode == IM_Login)  
+                            else if (logMode == IM_Login)
                             {
-                                if (prog.users.TryGetValue(userName, out userInfo))  
+                                if (prog.users.TryGetValue(userName, out userInfo))
                                 {
-                                    if (password == userInfo.Password) 
+                                    if (password == userInfo.Password)
                                     {
-                                       
+
                                         if (userInfo.LoggedIn)
                                             userInfo.Connection.CloseConn();
 
                                         userInfo.Connection = this;
                                         bw.Write(IM_OK);
                                         bw.Flush();
-                                        Receiver();  
+                                        Receiver();
                                     }
                                     else
                                         bw.Write(IM_WrongPass);
@@ -103,7 +103,7 @@ namespace InstantMessengerServer
             }
             catch { CloseConn(); }
         }
-        void CloseConn() 
+        void CloseConn()
         {
             try
             {
@@ -117,16 +117,16 @@ namespace InstantMessengerServer
             }
             catch { }
         }
-        void Receiver()  
+        void Receiver()
         {
             Console.WriteLine("[{0}] ({1}) User logged in", DateTime.Now, userInfo.UserName);
             userInfo.LoggedIn = true;
 
             try
             {
-                while (client.Client.Connected)  
+                while (client.Client.Connected)
                 {
-                    byte type = br.ReadByte();  
+                    byte type = br.ReadByte();
 
                     if (type == IM_IsAvailable)
                     {
@@ -139,12 +139,12 @@ namespace InstantMessengerServer
                         if (prog.users.TryGetValue(who, out info))
                         {
                             if (info.LoggedIn)
-                                bw.Write(true);   
+                                bw.Write(true);
                             else
-                                bw.Write(false); 
+                                bw.Write(false);
                         }
                         else
-                            bw.Write(false);      
+                            bw.Write(false);
                         bw.Flush();
                     }
                     else if (type == IM_Send)
@@ -155,15 +155,32 @@ namespace InstantMessengerServer
                         UserInfo recipient;
                         if (prog.users.TryGetValue(to, out recipient))
                         {
-                            
+
                             if (recipient.LoggedIn)
                             {
-                                
+
                                 recipient.Connection.bw.Write(IM_Received);
-                                recipient.Connection.bw.Write(userInfo.UserName); 
+                                recipient.Connection.bw.Write(userInfo.UserName);
                                 recipient.Connection.bw.Write(msg);
                                 recipient.Connection.bw.Flush();
                                 Console.WriteLine("[{0}] ({1} -> {2}) Message sent!", DateTime.Now, userInfo.UserName, recipient.UserName);
+                            }
+                        }
+                    }
+                    else if (type == IM_SendFile)
+                    {
+                        string to = br.ReadString();
+                        byte file = br.ReadByte();
+                        UserInfo recipient;
+                        if (prog.users.TryGetValue(to, out recipient))
+                        {
+                            if (recipient.LoggedIn)
+                            {
+                                recipient.Connection.bw.Write(IM_Received);
+                                recipient.Connection.bw.Write(userInfo.UserName);
+                                recipient.Connection.bw.Write(file);
+                                recipient.Connection.bw.Flush();
+                                Console.WriteLine("[{0}] ({1} -> {2}) File sent!", DateTime.Now, userInfo.UserName, recipient.UserName);
                             }
                         }
                     }
@@ -187,5 +204,6 @@ namespace InstantMessengerServer
         public const byte IM_IsAvailable = 8;  // Is user available?
         public const byte IM_Send = 9;         // Send message
         public const byte IM_Received = 10;    // Message received
+        public const byte IM_SendFile = 11;    //File send
     }
 }
