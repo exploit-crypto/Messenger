@@ -147,8 +147,6 @@ namespace InstantMessenger
             if (op.ShowDialog() == DialogResult.OK)
                 Clipboard.SetText(op.FileName);
             status.Text = "Uploading...";
-
-            //Stream s = client.GetStream();
             tmp = File.ReadAllBytes(op.FileName);
             //s.Write(tmp, 0, tmp.Length);
             im.SendFile(sendTo,tmp);

@@ -40,7 +40,6 @@
             this.sendButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.AddFile = new System.Windows.Forms.Button();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
@@ -171,11 +170,6 @@
             this.AddFile.UseVisualStyleBackColor = true;
             this.AddFile.Click += new System.EventHandler(this.AddFile_Click);
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -229,7 +223,6 @@
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Button AddFile;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel status;
     }

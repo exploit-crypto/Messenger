@@ -6,3 +6,11 @@ C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServ
 C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.csproj.CoreCompileInputs.cache
 C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.exe
 C:\Users\admin\Desktop\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.pdb
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\bin\Debug\server.pfx
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\bin\Debug\tools\generate_cert.bat
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\bin\Debug\InstantMessengerServer.exe
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\bin\Debug\InstantMessengerServer.pdb
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.csprojAssemblyReference.cache
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.csproj.CoreCompileInputs.cache
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.exe
+C:\Users\admin\Source\Repos\exploit-crypto\Messenger\InstantMessengerServer\obj\x86\Debug\InstantMessengerServer.pdb
